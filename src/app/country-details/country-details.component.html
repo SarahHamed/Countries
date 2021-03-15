@@ -1,1 +1,33 @@
-<p>country-details works!</p>
+<button (click)='back()' class="btn btn-light px-5 m-5 shadow-sm border">Back</button>
+<div class="d-flex justify-content-center align-items-center cont py-1">
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div *ngIf="countryDet" class="col-sm-12 col-md-6 m-5  ">
+            <img src="{{countryDet.flag}}" />
+        </div>
+        <div class="col-md-6 mt-5">
+        <h3 class="mt-5 mb-5">  {{countryDet.name}} </h3>
+        <div class="row">
+        <div class="col-md-6 ">
+            <p>Native Name: <span class="info">{{countryDet.nativeName}}</span></p>
+            <p><span>Population: </span> <span class="info">{{countryDet.population | currency: '': '':'1.0'}}</span></p>
+            <p>Region: <span class="info">{{countryDet.region}}</span></p>
+            <p>Sub Region: <span class="info">{{countryDet.subregion}}</span></p>
+            <p>Capital: <span class="info">{{countryDet.capital}}</span></p>
+        </div>
+        <div class="col-md-6 ">
+            <p>Top Level Domain: <span class="info">{{countryDet.topLevelDomain}}</span></p>
+            <p>Currencies: <span class="info">{{countryDet.currencies[0]['name']}}</span></p>
+            <p>Languages:
+            <span  *ngFor="let lang of countryDet.languages">{{lang['name']}}</span>
+        </p>
+        </div>
+        </div>
+        <p class="mt-5">Border Countries:
+            <a class="btn btn-light border mx-1" href="home/countryDetail/{{country}}" *ngFor="let country of countryDet.borders">
+            {{country}}
+            </a>
+        </p>
+</div>
+</div>
+</div>

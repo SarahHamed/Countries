@@ -16,7 +16,9 @@
       <div *ngFor="let country of allCountries" class="col-sm-12 col-md-3 my-4 ">
         <div class="container">
           <div class="imgClass">
+            <a [routerLink]="['/home/countryDetail',country.name]">
             <img src="{{country.flag}}" />
+          </a>
           </div>
           <div class="bg-white pt-2 pb-5 cont px-2">
             <h6 class="bold" class="my-2">{{country.name}}</h6>

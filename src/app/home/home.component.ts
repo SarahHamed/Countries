@@ -60,7 +60,4 @@ export class HomeComponent implements OnInit, OnDestroy {
     //Add 'implements OnDestroy' to the class.
     this.typeAhead$.unsubscribe();
   }
-
-
-
 }

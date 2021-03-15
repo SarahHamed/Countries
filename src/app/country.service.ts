@@ -22,6 +22,10 @@ export class CountryService {
       catchError(this.handleError)
     );
   }
+  countryDetails(countryName:string):Observable<any>
+  {
+    return this.http.get("https://restcountries.eu/rest/v2/name/"+countryName);
+  }
   handleError(error:HttpErrorResponse)
   {
     console.log(error);
