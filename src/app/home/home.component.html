@@ -1,4 +1,3 @@
-
 <div class="bg-white px-5 py-3 shadow-sm d-flex justify-content-between">
     <h5>Where is in the world?</h5>
     <h6><i class="far fa-moon"></i> Dark Mode</h6>
@@ -9,14 +8,16 @@
    <!--<p>{{searchInp}}</p> --> 
   </div>
 
-  <div class="alert alert-warning w-50 my-5 mx-auto" *ngIf="isError;else showCountries">{{errorMessage}}</div>
+ <!-- <div class="alert alert-warning w-50 my-5 mx-auto" *ngIf="isError;else showCountries">{{errorMessage}}</div>-->
 
+  <app-no-result *ngIf="isError;else showCountries" [errorMsg]="errorMessage"> </app-no-result> 
+  
   <ng-template #showCountries>
     <div class="row mx-5 mt-3">
       <div *ngFor="let country of allCountries" class="col-sm-12 col-md-3 my-4 ">
         <div class="container">
           <div class="imgClass">
-            <a [routerLink]="['/home/countryDetail',country.name]">
+            <a [routerLink]="['/home/countryDetail','country',country.name]">
             <img src="{{country.flag}}" />
           </a>
           </div>
