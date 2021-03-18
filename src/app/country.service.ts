@@ -16,16 +16,22 @@ export class CountryService {
       tap(response => console.log(response)),
     );
   }
-  searchResults(searchInp:string):Observable<any>
+  searchResults(searchInp:string|null):Observable<any>
   {
     return this.http.get("https://restcountries.eu/rest/v2/name/"+searchInp).pipe(
       catchError(this.handleError)
     );
   }
-  countryDetails(countryName:string):Observable<any>
+  countryDetails(countryName:string|null):Observable<any>
   {
     return this.http.get("https://restcountries.eu/rest/v2/name/"+countryName);
   }
+
+  countryByCode(countryName:string|null):Observable<any>
+  {
+    return this.http.get("https://restcountries.eu/rest/v2/alpha/"+countryName);
+  }
+
   handleError(error:HttpErrorResponse)
   {
     console.log(error);
