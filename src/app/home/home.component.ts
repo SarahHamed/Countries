@@ -16,22 +16,22 @@ import { GetAllCountries } from '../state/country.actions';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  //@Select(countryState.CountriesAll) public countries: any;
 
-  constructor(private countryService: CountryService, private _spinnerService: SpinnerService, private _store:Store) {
+  constructor(
+    private countryService: CountryService, 
+    private _spinnerService: SpinnerService, 
+    private _store: Store) {
   
    /* countryService.getAllCountries().subscribe((data: any) => {
       this.allCountries = data;
       console.log(data)
     });*/
 
-    this._store.dispatch(new GetAllCountries()).subscribe((data: any) => {
-      this.allCountries = data.country.CountriesAll;
-      console.log("ngxs:");
-      console.log(data)
-      console.log(data.country.CountriesAll)
-    });
+    
   }
+
+  @Select(countryState.CountriesAll) public countries$: any;
+
 
   allCountries: any = [];
   searchInp: string = "";
@@ -43,6 +43,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this._setupTypeAheadFunctionality();
+
+    this._store.dispatch(new GetAllCountries())
     // this.spinner.show();
  
     // setTimeout(() => {

@@ -4,6 +4,7 @@
   
   export class GetCountryByName {
     static readonly type = "[Country] Get Country By Name";
+    constructor(public name: string) {}
   }
 
   export class GetCountryByCode {

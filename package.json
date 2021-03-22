@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
     "@fortawesome/fontawesome-free": "^5.15.2",
+    "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/store": "^3.7.1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",

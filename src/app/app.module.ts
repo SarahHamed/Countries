@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { countryState } from './state/country.state';
 import { environment } from 'src/environments/environment';
+import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     NgxsModule.forRoot([countryState],{
       developmentMode: !environment.production
-    })
+    }),
+    NgxsSelectSnapshotModule.forRoot(),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
