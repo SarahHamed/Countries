@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CountryService } from '../country.service';
+import { CountryService } from '../model/country.service';
 import { map, tap,retry, catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from '../core/modules/spinner/spinner.service';
+import { Select, Store } from '@ngxs/store';
+import { countryState } from '../state/country.state';
+import { GetAllCountries } from '../state/country.actions';
 
 
 @Component({
@@ -13,11 +16,20 @@ import { SpinnerService } from '../core/modules/spinner/spinner.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  //@Select(countryState.CountriesAll) public countries: any;
 
-  constructor(private countryService: CountryService, private _spinnerService: SpinnerService) {
-    countryService.getAllCountries().subscribe((data: any) => {
+  constructor(private countryService: CountryService, private _spinnerService: SpinnerService, private _store:Store) {
+  
+   /* countryService.getAllCountries().subscribe((data: any) => {
       this.allCountries = data;
       console.log(data)
+    });*/
+
+    this._store.dispatch(new GetAllCountries()).subscribe((data: any) => {
+      this.allCountries = data.country.CountriesAll;
+      console.log("ngxs:");
+      console.log(data)
+      console.log(data.country.CountriesAll)
     });
   }
 

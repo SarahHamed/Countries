@@ -12,6 +12,9 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { SpinnerModule } from './core/modules/spinner/spinner.module';
 import {NoResultComponent} from './shared/no-result/no-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxsModule } from '@ngxs/store';
+import { countryState } from './state/country.state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     SpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxsModule.forRoot([countryState],{
+      developmentMode: !environment.production
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

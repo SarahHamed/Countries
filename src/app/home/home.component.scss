@@ -1,5 +1,20 @@
 body
 {
-    background-color: 	#fafafa;
+    background-color: 	#fafafa !important;
 }
 
+.fontAwesome
+{
+    font-family: 'Helvetica', FontAwesome, sans-serif; 
+}
+
+::placeholder
+{
+    color: rgba(0,0,0,0.3);
+}
+
+select
+{
+    font-size: 15px;
+    font-weight: 600;
+}
