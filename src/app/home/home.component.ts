@@ -22,12 +22,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     private countryService: CountryService, 
     private _spinnerService: SpinnerService, 
     private _store: Store) {
-  
-   /* countryService.getAllCountries().subscribe((data: any) => {
-      this.allCountries = data;
-      console.log(data)
-    });*/
-
     
   }
 
@@ -45,9 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this._setupTypeAheadFunctionality();
-
     this._store.dispatch(new GetAllCountries())
-   // console.log("countries$: "+this.countries$)
   }
 
   onSearchInput() {
@@ -79,45 +71,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.isError=true;
       return of([]);
       }) ))
-    ).subscribe((data: any) => {
-     // this.allCountries = data;
-     
+    ).subscribe(() => {
       this._spinnerService.hide();
-  /*    console.log("search is working");
-      console.log("data or this.allCountries")
-      console.log(data)
-      console.log("data.country"+data.country)
-      console.log(data.country.CountriesAll)
-      console.log(this.CountriesSearchRes)*/
     })
 
   }
-  /*
-  private _setupTypeAheadFunctionality() {
-    this.typeAhead$.pipe(
-      debounceTime(3000),
-      distinctUntilChanged(),
-      switchMap(term => this.countryService.searchResults(term).pipe(catchError(error =>{
-      this.errorMessage=error;
-      return of([]);
-      }) ))
-    ).subscribe((data: any) => {
-      this.allCountries = data;
-      if(this.allCountries.length)
-       this.isError = false;
-      else
-        this.isError=true;
-      this._spinnerService.hide();
-      console.log("search is working");
-      console.log(data)
-      console.log(this.allCountries)
-    },
-      //error => { this.errorMessage = error; this.isError = true; this._spinnerService.hide() }
-      )
-
-  }
-  */
-
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

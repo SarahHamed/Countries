@@ -19,8 +19,6 @@ import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
 })
 export class CountryDetailsComponent implements OnInit {
 
-
-
   constructor(
     private _countryService: CountryService, 
     private _activatedRoute: ActivatedRoute, 
@@ -31,7 +29,6 @@ export class CountryDetailsComponent implements OnInit {
   }
 
   @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
-
   //@Select(countryState.countryDetails) public countryDet$: any;
 
   public isBorderCountry: boolean = false;
@@ -50,21 +47,12 @@ export class CountryDetailsComponent implements OnInit {
     this.nameVal = this._activatedRoute.snapshot.params.name;
     this.country = this._activatedRoute.snapshot.params.country;
 
-    // console.log("country is " + this.country);
-
-
     // Incase of clicking on border countries buttons
     if (this.country === "code") {
-      console.log("d5lt l if");
-     /* this._countryService.countryByCode(this.nameVal).subscribe((data) => {
-        this.countryDet = data;
-        this._spinnerService.hide();
-      });*/
       this._store.dispatch(new GetCountryByCode(this.nameVal)).subscribe(() => {
         this._spinnerService.hide();
       })
     }
-
 
     // Incase of searching by Country name
     else if (this.country === "country") {
@@ -73,12 +61,7 @@ export class CountryDetailsComponent implements OnInit {
         this._spinnerService.hide();
       })
     }
-    //    this._spinnerService.show();
-
-    /*
-       setTimeout(() => {
-         this._spinnerService.hide();
-       }, 1000);*/
+ 
   }
 
 }
