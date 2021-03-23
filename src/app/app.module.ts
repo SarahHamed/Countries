@@ -16,6 +16,7 @@ import { NgxsModule } from '@ngxs/store';
 import { countryState } from './state/country.state';
 import { environment } from 'src/environments/environment';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
   declarations: [
@@ -33,10 +34,11 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
     ReactiveFormsModule,
     SpinnerModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([countryState],{
-      developmentMode: !environment.production
-    }),
+    NgxsModule.forRoot([countryState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsSelectSnapshotModule.forRoot(),
+
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

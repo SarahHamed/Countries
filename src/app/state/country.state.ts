@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-import {GetAllCountries, GetCountryByName, GetCountryByCode} from './country.actions';
+import {GetAllCountries, GetCountryByName, GetCountryByCode,GetSearchResults} from './country.actions';
 import { CountryService } from '../model/country.service';
 
 export class CountryStateModel {
@@ -58,7 +58,22 @@ export class countryState {
     @Action(GetCountryByName)
     public getCountryByName(ctx: StateContext<CountryStateModel>, payload: GetCountryByName) {
       return this._countryService.countryDetails(payload.name).pipe(
+        tap(countryDetails => {ctx.patchState({countryDetails:countryDetails[0]});
+      })
+      )
+    }
+    @Action(GetCountryByCode)
+    public getCountryByCode(ctx: StateContext<CountryStateModel>, payload: GetCountryByCode) {
+      return this._countryService.countryByCode(payload.code).pipe(
         tap(countryDetails => ctx.patchState({countryDetails}))
+      )
+    }
+
+    @Action(GetSearchResults)
+    public getSearchResults(ctx: StateContext<CountryStateModel>, payload: GetSearchResults) {
+      console.log("term is"+ payload.searchInp );
+      return this._countryService.searchResults(payload.searchInp).pipe(
+        tap(countryDetails => ctx.patchState({CountriesAll:countryDetails}))
       )
     }
 }
