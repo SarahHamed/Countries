@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CountryService } from '../../../model/country.service';
+import { CountryService } from '../../model/country.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { concat, from, Observable, of } from 'rxjs';
 import { SpinnerService } from '../../../../core/modules/spinner/spinner.service';
 import { Select, Store } from '@ngxs/store';
-import { countryState } from '../../../state/country.state';
-import { GetCountryByName, GetCountryByCode } from '../../../state/country.actions';
+import { countryState } from '../../state/country.state';
+import { GetCountryByName, GetCountryByCode } from '../../state/country.actions';
 import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { catchError } from 'rxjs/operators';
-import {Country} from '../../../model/countries.model';
+import {CountryModel} from '../../model/countries.model';
 
 @Component({
   selector: 'app-country-details',

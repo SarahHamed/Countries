@@ -1,13 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CountryService } from '../../../model/country.service';
+import { CountryService } from '../../model/country.service';
 import { map, tap,retry, catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from '../../../../core/modules/spinner/spinner.service';
 import { Select, Store } from '@ngxs/store';
-import { countryState } from '../../../state/country.state';
-import { GetAllCountries, GetSearchResults } from '../../../state/country.actions';
+import { countryState } from '../../state/country.state';
+import { GetAllCountries, GetSearchResults } from '../../state/country.actions';
 import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { CountryModel } from '../../model/countries.model';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit , OnDestroy {
   }
 
   //@Select(countryState.CountriesAll) public countries$: any;
-  @ViewSelectSnapshot(countryState.CountriesAll) public CountriesSearchRes: any;
+  @ViewSelectSnapshot(countryState.CountriesAll) public CountriesSearchRes!: CountryModel[];
 
 
   allCountries: any = [];

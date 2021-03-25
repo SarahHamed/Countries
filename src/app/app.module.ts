@@ -13,7 +13,7 @@ import { SpinnerModule } from './core/modules/spinner/spinner.module';
 //import {NoResultComponent} from './shared/components/no-result/no-result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
-import { countryState } from './modules/state/country.state';
+import { countryState } from './modules/countries/state/country.state';
 import { environment } from 'src/environments/environment';
 import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
