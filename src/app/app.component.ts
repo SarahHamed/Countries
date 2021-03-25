@@ -4,6 +4,7 @@ import { NavigationStart, NavigationEnd, NavigationCancel,NavigationError, Route
 import { filter } from 'rxjs/operators';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { SpinnerService } from './core/modules/spinner/spinner.service';
+import { SpinnerWrapperComponent } from './core/modules/spinner/spinner-wrapper/spinner-wrapper.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _spinnerService: SpinnerService,
-    private _router: Router
+    private _router: Router,
     ) {}
  
   ngOnInit() {

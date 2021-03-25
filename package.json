@@ -23,6 +23,7 @@
     "@ngxs-labs/select-snapshot": "^2.0.1",
     "@ngxs/devtools-plugin": "^3.7.1",
     "@ngxs/store": "^3.7.1",
+    "angular-material": "^1.2.2",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "ngx-spinner": "^10.0.1",

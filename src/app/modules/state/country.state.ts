@@ -3,6 +3,8 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import {GetAllCountries, GetCountryByName, GetCountryByCode,GetSearchResults} from './country.actions';
 import { CountryService } from '../model/country.service';
+import {Country} from '../model/countries.model';
+
 
 export class CountryStateModel {
 

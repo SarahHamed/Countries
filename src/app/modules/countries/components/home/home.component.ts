@@ -1,22 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CountryService } from '../model/country.service';
+import { CountryService } from '../../../model/country.service';
 import { map, tap,retry, catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
-import { SpinnerService } from '../core/modules/spinner/spinner.service';
+import { SpinnerService } from '../../../../core/modules/spinner/spinner.service';
 import { Select, Store } from '@ngxs/store';
-import { countryState } from '../state/country.state';
-import { GetAllCountries, GetSearchResults } from '../state/country.actions';
+import { countryState } from '../../../state/country.state';
+import { GetAllCountries, GetSearchResults } from '../../../state/country.actions';
 import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-
+export class HomeComponent implements OnInit , OnDestroy {
 
   constructor(
     private countryService: CountryService, 
@@ -82,4 +80,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     //Add 'implements OnDestroy' to the class.
     this.typeAhead$.unsubscribe();
   }
+
 }

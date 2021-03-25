@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CountryService } from '../model/country.service';
+import { CountryService } from '../../../model/country.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
-import { concat, Observable } from 'rxjs';
-import { SpinnerService } from '../core/modules/spinner/spinner.service';
+import { concat, from, Observable, of } from 'rxjs';
+import { SpinnerService } from '../../../../core/modules/spinner/spinner.service';
 import { Select, Store } from '@ngxs/store';
-import { countryState } from '../state/country.state';
-import { GetCountryByName, GetCountryByCode } from '../state/country.actions';
+import { countryState } from '../../../state/country.state';
+import { GetCountryByName, GetCountryByCode } from '../../../state/country.actions';
 import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
-
-
+import { catchError } from 'rxjs/operators';
+import {Country} from '../../../model/countries.model';
 
 @Component({
   selector: 'app-country-details',
@@ -18,7 +18,6 @@ import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
   styleUrls: ['./country-details.component.scss']
 })
 export class CountryDetailsComponent implements OnInit {
-
   constructor(
     private _countryService: CountryService, 
     private _activatedRoute: ActivatedRoute, 
@@ -27,13 +26,17 @@ export class CountryDetailsComponent implements OnInit {
     private _store: Store) {
     //this._spinnerService.show();
   }
-
   @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
+
+//  @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
   //@Select(countryState.countryDetails) public countryDet$: any;
 
   public isBorderCountry: boolean = false;
   public nameVal!: string;
   public country!: string;
+
+  errorMessage: string="";
+  isError: boolean = false;
 
 
   back() {
@@ -49,7 +52,12 @@ export class CountryDetailsComponent implements OnInit {
 
     // Incase of clicking on border countries buttons
     if (this.country === "code") {
-      this._store.dispatch(new GetCountryByCode(this.nameVal)).subscribe(() => {
+      this._store.dispatch(new GetCountryByCode(this.nameVal)).pipe(
+        catchError(error =>{
+        this.errorMessage=error;
+        this.isError=true;
+        return of([]);
+        })).subscribe(() => {
         this._spinnerService.hide();
       })
     }
@@ -57,7 +65,12 @@ export class CountryDetailsComponent implements OnInit {
     // Incase of searching by Country name
     else if (this.country === "country") {
       console.log("d5lt l if");
-      this._store.dispatch(new GetCountryByName(this.nameVal)).subscribe(() => {
+      this._store.dispatch(new GetCountryByName(this.nameVal)).pipe(
+        catchError(error =>{
+        this.errorMessage=error;
+        this.isError=true;
+        return of([]);
+        })).subscribe(() => {
         this._spinnerService.hide();
       })
     }

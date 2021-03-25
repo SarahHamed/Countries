@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {map, tap, catchError, debounceTime} from 'rxjs/operators';
+import {Country} from './countries.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class CountryService {
 
   constructor(private http:HttpClient) { }
 
-  getAllCountries():Observable<any>
+  getAllCountries():Observable<Country>
   {
-    return this.http.get<any>("https://restcountries.eu/rest/v2/all").pipe(
+    return this.http.get<Country>("https://restcountries.eu/rest/v2/all").pipe(
       tap(response => console.log(response)),
     );
   }
@@ -24,12 +25,16 @@ export class CountryService {
   }
   countryDetails(countryName:string|null):Observable<any>
   {
-    return this.http.get("https://restcountries.eu/rest/v2/name/"+countryName);
+    return this.http.get("https://restcountries.eu/rest/v2/name/"+countryName).pipe(
+      catchError(this.handleError)
+    );
   }
 
   countryByCode(countryName:string|null):Observable<any>
   {
-    return this.http.get("https://restcountries.eu/rest/v2/alpha/"+countryName);
+    return this.http.get("https://restcountries.eu/rest/v2/alpha/"+countryName).pipe(
+      catchError(this.handleError)
+    );
   }
 
   handleError(error:HttpErrorResponse)
