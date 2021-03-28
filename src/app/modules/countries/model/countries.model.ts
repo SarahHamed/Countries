@@ -7,9 +7,10 @@ export interface CountryModel {
     subregion: string;
     capital: string;
     topLevelDomain: string;
-    currencies: [];
+    currencies: {[key: string]: string}[];
     languages: {[key: string]: string}[]; 
     flag: string;
+    borders: string [];
 }
 /*
 countryDet.name

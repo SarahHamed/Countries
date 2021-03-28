@@ -16,12 +16,13 @@ export class CountryService {
   getAllCountries(): Observable<CountryModel[]> {
     return this.http.get<CountryModel[]>(`${this._endpointBase}/all`).pipe(
       tap(response => console.log(response)),
+      catchError(this.handleError)
     );
   }
 
 
-  searchResults(searchInp: string | null): Observable<any> {
-    return this.http.get(`${this._endpointBase}/name/${searchInp}`).pipe(
+  searchResults(searchInp: string | null): Observable<CountryModel[]> {
+    return this.http.get<CountryModel[]>(`${this._endpointBase}/name/${searchInp}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -29,14 +30,14 @@ export class CountryService {
 
 
   countryDetails(countryName: string | null): Observable<any> {
-    return this.http.get("https://restcountries.eu/rest/v2/name/" + countryName).pipe(
+    return this.http.get(`${this._endpointBase}/name/${countryName}`).pipe(
       catchError(this.handleError)
     );
   }
 
 
-  countryByCode(countryName: string | null): Observable<any> {
-    return this.http.get("https://restcountries.eu/rest/v2/alpha/" + countryName).pipe(
+  countryByCode(countryCode: string | null): Observable<any> {
+    return this.http.get(`${this._endpointBase}/alpha/${countryCode}`).pipe(
       catchError(this.handleError)
     );
   }

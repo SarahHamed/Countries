@@ -1,4 +1,3 @@
-<p>country-details works!</p>
 <button (click)='back()' class="btn btn-light px-5 m-5 shadow-sm border">Back</button>
 
 <app-no-result *ngIf="isError; else showDetails" [errorMsg]="errorMessage"> </app-no-result> 
@@ -8,7 +7,7 @@
 <div class="d-flex justify-content-center align-items-center cont py-1">
 <div class="container">
     <div class="d-flex justify-content-between">
-        <div *ngIf="countryDet" class="col-sm-12 col-md-6 m-5  ">
+        <div *ngIf="countryDet" class="col-sm-12 col-md-6 m-5 ">
             <img src="{{countryDet.flag}}" />
         </div>
         <div class="col-md-6 mt-5">  

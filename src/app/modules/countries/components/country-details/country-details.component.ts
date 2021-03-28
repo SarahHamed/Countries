@@ -26,7 +26,7 @@ export class CountryDetailsComponent implements OnInit {
     private _store: Store) {
     //this._spinnerService.show();
   }
-  @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
+  @ViewSelectSnapshot(countryState.countryDetails) public countryDet!: CountryModel;
 
 //  @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
   //@Select(countryState.countryDetails) public countryDet$: any;
