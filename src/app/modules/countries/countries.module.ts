@@ -5,7 +5,8 @@ import {CountryDetailsComponent} from './components/country-details/country-deta
 import { FormsModule } from '@angular/forms';
 //import {SharedModule} from '../../shared/shared.module';
 //import {NoResultComponent} from '../../shared/components/no-result/no-result.component';
-import { AppRoutingModule } from '../../app-routing.module';
+//import { AppRoutingModule } from '../../app-routing.module';
+import { CountriesRoutingModule } from './countries-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import { from } from 'rxjs';
 
@@ -22,8 +23,9 @@ import { from } from 'rxjs';
   imports: [
     CommonModule,
     FormsModule,
-    AppRoutingModule,
-    SharedModule
+   // AppRoutingModule,
+    SharedModule,
+    CountriesRoutingModule
   ]
 })
 export class CountriesModule { }

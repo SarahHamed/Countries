@@ -23,7 +23,7 @@
       <div *ngFor="let country of CountriesSearchRes" class="col-sm-12 col-md-3 my-4 ">
         <div class="container">
           <div class="imgClass">
-            <a [routerLink]="['/home/countryDetail','country',country.name]">
+            <a [routerLink]="['/countries/countryDetail','country',country.name]">
             <img src="{{country.flag}}" />
           </a>
           </div>

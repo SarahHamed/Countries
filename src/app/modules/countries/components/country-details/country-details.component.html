@@ -1,4 +1,4 @@
-<button (click)='back()' class="btn btn-light px-5 m-5 shadow-sm border">Back</button>
+<button routerLink="/countries" class="btn btn-light px-5 m-5 shadow-sm border">Back</button>
 
 <app-no-result *ngIf="isError; else showDetails" [errorMsg]="errorMessage"> </app-no-result> 
 
@@ -29,7 +29,7 @@
                  </div>
              </div>
         <p class="mt-5">Border Countries:
-            <a class="btn btn-light border mx-1" href="home/countryDetail/code/{{country}}" *ngFor="let country of countryDet.borders">
+            <a class="btn btn-light border mx-1" href="countries/countryDetail/code/{{country}}" *ngFor="let country of countryDet.borders">
             {{country}}
             </a>
         </p>
