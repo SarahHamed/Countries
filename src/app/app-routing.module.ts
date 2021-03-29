@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //import { CountryDetailsComponent } from './modules/components/country-details/country-details.component';
-import { CountryDetailsComponent } from './modules/countries/components/country-details/country-details.component';
+import { CountryDetailsComponent } from './modules/countries/pages/country-details/country-details.component';
 //import { HomeComponent } from './modules/components/home/home.component';
-import { HomeComponent } from './modules/countries/components/home/home.component';
+import { HomeComponent } from './modules/countries/pages/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { CountriesModule } from './modules/countries/countries.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';

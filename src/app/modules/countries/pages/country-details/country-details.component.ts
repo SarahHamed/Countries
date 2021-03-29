@@ -62,8 +62,6 @@ export class CountryDetailsComponent implements OnInit {
       else if (type === this.COUNTRY_TYPE) this._getCountryByName(name);
     })
 
-
-
   }
 
 

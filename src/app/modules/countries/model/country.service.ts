@@ -29,15 +29,15 @@ export class CountryService {
 
 
 
-  countryDetails(countryName: string | null): Observable<any> {
-    return this.http.get(`${this._endpointBase}/name/${countryName}`).pipe(
+  countryDetails(countryName: string | null): Observable<CountryModel[]> {
+    return this.http.get<CountryModel[]>(`${this._endpointBase}/name/${countryName}`).pipe(
       catchError(this.handleError)
     );
   }
 
 
-  countryByCode(countryCode: string | null): Observable<any> {
-    return this.http.get(`${this._endpointBase}/alpha/${countryCode}`).pipe(
+  countryByCode(countryCode: string | null): Observable<CountryModel> {
+    return this.http.get<CountryModel>(`${this._endpointBase}/alpha/${countryCode}`).pipe(
       catchError(this.handleError)
     );
   }

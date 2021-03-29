@@ -1,0 +1,7 @@
+<button routerLink="/countries" class="btn btn-light px-5 m-5 shadow-sm border">Back</button>
+
+<app-no-result *ngIf="isError; else showDetails" [errorMsg]="errorMessage"> </app-no-result> 
+
+<ng-template #showDetails>
+    <app-country-details-card [countryDet]="countryDet"></app-country-details-card>
+</ng-template>

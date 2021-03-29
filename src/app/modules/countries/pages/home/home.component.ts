@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { CountryService } from '../../model/country.service';
 import { map, tap,retry, catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Observable, of, Subject, throwError } from 'rxjs';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
@@ -18,7 +17,6 @@ import { CountryModel } from '../../model/countries.model';
 export class HomeComponent implements OnInit , OnDestroy {
 
   constructor(
-    private countryService: CountryService, 
     private _spinnerService: SpinnerService, 
     private _store: Store) {
     
@@ -49,10 +47,9 @@ export class HomeComponent implements OnInit , OnDestroy {
       this.typeAhead$.next(this.searchInp)
     }
     else {
-      this.countryService.getAllCountries().subscribe((data) => {
-        this.allCountries = data;
+      this._store.dispatch(new GetAllCountries()).pipe(
+        catchError(error => this._setError(error)) ).subscribe((data) => {
         this.isError = false;
-        console.log(data)
         this._spinnerService.hide();
       });
     }
@@ -65,16 +62,28 @@ export class HomeComponent implements OnInit , OnDestroy {
       debounceTime(3000),
       distinctUntilChanged(),
       switchMap(term => this._store.dispatch(new GetSearchResults(term)).pipe(
-      catchError(error =>{
-      this.errorMessage=error;
-      this.isError=true;
-      return of([]);
-      }) ))
+      catchError(error => this._setError(error)) ))
     ).subscribe(() => {
       this._spinnerService.hide();
     })
 
   }
+
+
+
+  /**
+   * @description set the error
+   * @param error 
+   * @returns 
+   */
+   private _setError(error: any): Observable<any> {
+    this.errorMessage = error;
+    this.isError = true;
+    return of([]);
+  }
+
+
+
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

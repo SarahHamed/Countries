@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="imgClass flag-img">
+      <a [routerLink]="['country', country.name]">
+      <img src="{{country.flag}}" />
+    </a>
+    </div>
+    <div class="bg-white pt-2 pb-5 cont px-2">
+      <h6 class="bold" class="my-2">{{country.name}}</h6>
+      <p><span>Population: </span> <span class="info">{{country.population | currency: '': '':'1.0'}}</span></p>
+      <p><span>Region: </span> <span class="info">{{country.region}}</span></p>
+      <p><span>Capital: </span> <span class="info">{{country.capital}}</span></p>
+    </div>
+  </div> 

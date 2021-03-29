@@ -1,0 +1,6 @@
+<p class="mt-5">Border Countries:
+    <a class="btn btn-light border mx-1" [routerLink]="['/countries', 'code', country]"  
+    *ngFor="let country of bordersList">
+    {{country}}
+    </a>
+</p>

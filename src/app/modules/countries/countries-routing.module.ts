@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { CountryDetailsComponent } from './components/country-details/country-details.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CountryDetailsComponent } from './pages/country-details/country-details.component';
 
 
 
