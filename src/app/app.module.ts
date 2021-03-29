@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 //import { HomeComponent } from './modules/components/home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 //import { CountryDetailsComponent } from './modules/components/country-details/country-details.component';
 import { ReactiveFormsModule} from '@angular/forms';
 import { SpinnerModule } from './core/modules/spinner/spinner.module';
@@ -19,12 +19,14 @@ import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CountriesModule } from './modules/countries/countries.module';
 import {SharedModule} from './shared/shared.module';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
   //  HomeComponent,
     LoginComponent,
+  PageNotFoundComponent,
     //CountryDetailsComponent,
   //  NoResultComponent,
   ],
