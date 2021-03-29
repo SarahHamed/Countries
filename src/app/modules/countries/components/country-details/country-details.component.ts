@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CountryService } from '../../model/country.service';
 import { Router } from '@angular/router';
-import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
-import { concat, from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SpinnerService } from '../../../../core/modules/spinner/spinner.service';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { countryState } from '../../state/country.state';
 import { GetCountryByName, GetCountryByCode } from '../../state/country.actions';
 import { ViewSelectSnapshot, SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { catchError } from 'rxjs/operators';
-import {CountryModel} from '../../model/countries.model';
+import { CountryModel } from '../../model/countries.model';
 
 @Component({
   selector: 'app-country-details',
@@ -18,63 +16,105 @@ import {CountryModel} from '../../model/countries.model';
   styleUrls: ['./country-details.component.scss']
 })
 export class CountryDetailsComponent implements OnInit {
+
+
+
   constructor(
-    private _countryService: CountryService, 
-    private _activatedRoute: ActivatedRoute, 
-    private _router: Router, 
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router,
     private _spinnerService: SpinnerService,
     private _store: Store) {
-    //this._spinnerService.show();
   }
+
+
+
   @ViewSelectSnapshot(countryState.countryDetails) public countryDet!: CountryModel;
 
-//  @ViewSelectSnapshot(countryState.countryDetails) public countryDet: any;
-  //@Select(countryState.countryDetails) public countryDet$: any;
 
   public isBorderCountry: boolean = false;
   public nameVal!: string;
   public country!: string;
 
-  errorMessage: string="";
+  public readonly CODE_TYPE = "code";
+  public readonly COUNTRY_TYPE = 'country';
+
+  errorMessage: string = "";
   isError: boolean = false;
 
 
-  back() {
-    this._router.navigate(['../home']);
-  }
+
 
   ngOnInit(): void {
 
     this._spinnerService.show();
 
-    this.nameVal = this._activatedRoute.snapshot.params.name;
-    this.country = this._activatedRoute.snapshot.params.country;
 
-    // Incase of clicking on border countries buttons
-    if (this.country === "code") {
-      this._store.dispatch(new GetCountryByCode(this.nameVal)).pipe(
-        catchError(error =>{
-        this.errorMessage=error;
-        this.isError=true;
-        return of([]);
-        })).subscribe(() => {
+    /* Listen to parameters changes and subscribe to it */
+    this._activatedRoute.params.subscribe(params => {
+      const type = params.type;
+      const name = params.name;
+
+
+      // Incase of clicking on border countries buttons
+      if (type === this.CODE_TYPE) this._getCountryByCode(name)
+
+      // Incase of searching by Country name
+      else if (type === this.COUNTRY_TYPE) this._getCountryByName(name);
+    })
+
+
+
+  }
+
+
+
+
+  /**
+   * @description get Country by code
+   * @param name 
+   */
+  private _getCountryByCode(name: string) {
+    this._store.dispatch(new GetCountryByCode(name)).pipe(
+      catchError(error => (this._setError(error))))
+      .subscribe(() => {
         this._spinnerService.hide();
       })
-    }
+  }
 
-    // Incase of searching by Country name
-    else if (this.country === "country") {
-      console.log("d5lt l if");
-      this._store.dispatch(new GetCountryByName(this.nameVal)).pipe(
-        catchError(error =>{
-        this.errorMessage=error;
-        this.isError=true;
-        return of([]);
-        })).subscribe(() => {
+
+  /**
+   * @description Get Country by name
+   * @param name 
+   */
+  private _getCountryByName(name: string) {
+    this._store.dispatch(new GetCountryByName(name)).pipe(
+      catchError(error => this._setError(error)))
+      .subscribe(() => {
         this._spinnerService.hide();
       })
-    }
- 
+  }
+
+
+
+  /**
+   * @description Go back to the manage page
+   * @deprecated
+   */
+  public back() {
+    this._router.navigate(['../home']);
+  }
+
+
+
+  /**
+   * @description set the error
+   * @param error 
+   * @returns 
+   */
+  private _setError(error: any): Observable<any> {
+    this.errorMessage = error;
+    this.isError = true;
+    return of([]);
   }
 
 }

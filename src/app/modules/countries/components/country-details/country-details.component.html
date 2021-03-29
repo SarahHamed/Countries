@@ -29,7 +29,8 @@
                  </div>
              </div>
         <p class="mt-5">Border Countries:
-            <a class="btn btn-light border mx-1" href="countries/countryDetail/code/{{country}}" *ngFor="let country of countryDet.borders">
+            <a class="btn btn-light border mx-1" [routerLink]="['/countries', 'code', country]"  
+            *ngFor="let country of countryDet.borders">
             {{country}}
             </a>
         </p>

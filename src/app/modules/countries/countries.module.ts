@@ -18,12 +18,10 @@ import { from } from 'rxjs';
   declarations: [
     HomeComponent,
     CountryDetailsComponent
-  //  NoResultComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-   // AppRoutingModule,
     SharedModule,
     CountriesRoutingModule
   ]
